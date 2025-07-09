@@ -1,46 +1,175 @@
-# Getting Started with Create React App
+# T4 – Integração Front-End com Back-End RESTful
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 1. Introdução
 
-## Available Scripts
+Este projeto corresponde à atividade 4 da avaliação do professor Gerson da Pinha Neto, e tem como objetivo integrar a interface gráfica de um sistema com um serviço de back-end RESTful, desenvolvido em Java. Essa atividade introduz a comunicação entre front-end e back-end, utilizando requisições HTTP e o formato JSON para trafegar dados, com foco na manipulação da entidade Cliente.
 
-In the project directory, you can run:
+## 2. Funcionalidades
 
-### `npm start`
+- Listar clientes cadastrados no back-end
+- Cadastrar novos clientes
+- Editar dados de clientes existentes
+- Excluir clientes do sistema
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Toda a comunicação entre a interface e o servidor é feita via requisições HTTP (GET, POST, PUT e DELETE) para o micro-serviço Java fornecido.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+## 3. Tecnologias utilizadas
 
-### `npm test`
+### Frontend
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- **React 19.1.0** – Biblioteca para construção de interfaces.
+- **React DOM 19.1.0** – Responsável por conectar os componentes React à DOM do navegador.
+- **TypeScript 4.9.5** – Superset do JavaScript com tipagem estática.
+- **React Scripts 5.0.1** – Scripts de build, teste e execução (via Create React App).
+- **Web Vitals 2.1.4** – Biblioteca para coleta de métricas de desempenho.
+- **Node.js 23.5.0** – Utilizado como ambiente para rodar e compilar o projeto React (via npm).
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+### Backend
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+- **Java 17 ou superior** – Necessário para executar o micro-serviço Java `pl.jar`, que oferece a API REST para gerenciamento de clientes.
+- **Micro-serviço RESTful (fornecido)** – Disponibiliza os seguintes endpoints:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## 4. Estrutura do projeto
 
-### `npm run eject`
+```
+T4/
+├── executavel/
+│   └── pl.jar
+├── frontend/
+│   ├── public/
+│   │   ├── favicon.ico
+│   │   ├── index.html
+│   │   ├── logo192.png
+│   │   ├── logo512.png
+│   │   ├── manifest.json
+│   │   └── robots.txt
+│   ├── src/
+│   │   ├── paginas/
+│   │   │   ├── cadastro.tsx
+│   │   │   ├── edicao.tsx
+│   │   │   ├── home.tsx
+│   │   │   └── listagem.tsx
+│   │   ├── servicos/
+│   │   │   ├── buscarClientes.ts
+│   │   │   ├── cadastrarCliente.ts
+│   │   │   ├── editarCliente.ts
+│   │   │   └── listagem.tsx
+│   │   ├── App.css
+│   │   ├── App.test.tsx
+│   │   ├── App.tsx
+│   │   ├── index.css
+│   │   ├── index.tsx
+│   │   ├── logo.svg
+│   │   ├── react-app-env.d.ts
+│   │   ├── reportWebVitals.ts
+│   │   └── setupTests.ts
+│   ├── .gitignore
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── README.md
+│   └── tsconfig.json
+├── pl/
+│   ├── .mvn/wrapper/
+│   │   ├── maven-wrapper.jar
+│   │   └── maven-wrapper.properties
+│   ├── src/
+│   │   ├── main
+│   │   │   ├── java/com/fatec/pl/
+│   │   │   │   ├── atualizador/
+│   │   │   │   │   ├── Atualizador.java
+│   │   │   │   │   ├── AtualizadorCliente.java
+│   │   │   │   │   └── AtualizadorEndereco.java
+│   │   │   │   ├── comparador/
+│   │   │   │   │   └── ComparadorTelefone.java
+│   │   │   │   ├── controle/
+│   │   │   │   │   └── ControleCliente.java
+│   │   │   │   ├── hateoas/
+│   │   │   │   │   ├── Hateoas.java
+│   │   │   │   │   └── HateoasCliente.java
+│   │   │   │   ├── modelo/
+│   │   │   │   │   ├── Cliente.java
+│   │   │   │   │   ├── Endereco.java
+│   │   │   │   │   └── Telefone.java
+│   │   │   │   ├── repositorio/
+│   │   │   │   │   └── RepositorioCliente.java
+│   │   │   │   ├── verificador/
+│   │   │   │   │   ├── Verificador.java
+│   │   │   │   │   ├── VerificadorEnderecoNulo.java
+│   │   │   │   │   ├── VerificadorStringNula.java
+│   │   │   │   │   └── VerificadorTelefoneNulo.java
+│   │   │   │   └── PIApplication.java
+│   │   │   └── resources/
+│   │   │       └── application.properties
+│   │   └── test/java/com/fatec/pl
+│   │       └── PlApplicationTests.java
+│   ├── .gitignore
+│   ├── mvnw
+│   ├── mvnw.cmd
+└── └── pom.xml
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+```
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## 5. Instruções para execução
+Siga os passos abaixo para executar o projeto localmente:
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+**1 -> Clone o repositório:**
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+```
+git clone https://github.com/juliasoares17/T4
+```
 
-## Learn More
+**ℹ️ Observação:**  Para rodar esta aplicação, você precisará de dois terminais em execução: Um para o backend e outro para o frontend.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+**Em ambos os terminais:**
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+**2 ->  Acesse o repositório:**
+
+```
+cd T4
+```
+
+**No terminal para o backend:**
+
+**3 -> Acesse a seguinte pasta:**
+```
+cd executavel
+```
+
+**4 -> Execute o arquivo pl.jar:**
+```
+java -jar pl.jar
+```
+
+A aplicação backend será iniciada em:
+http://localhost:32831
+
+**No terminal para o frontend:**
+
+**5 -> Abra o diretório dedicado ao frontend:**
+```
+cd frontend
+```
+
+**6 -> Instale as dependências:**
+
+```
+npm install
+```
+
+ℹ️ **Observação:** Durante a instalação (`npm install`), alguns avisos de dependências desatualizadas podem aparecer. Isso não compromete a execução do projeto.
+
+**7 -> Inicie a aplicação:**
+
+```
+npm start
+```
+
+Abra o navegador e acesse: http://localhost:3000
+
+A interface gráfica estará disponível, já integrada ao micro-serviço de clientes.
+
+Para encerrar o projeto, pressione CTRL + C no terminal e confirme digitando “s” se solicitado.
+
+## 6. Considerações finais
+Esta atividade teve como foco principal aplicar o conceito de integração entre front-end e back-end RESTful, utilizando um micro-serviço Java já disponível. Com isso, foi possível simular uma aplicação real de cadastro e gerenciamento de clientes com base em APIs e requisições HTTP. Além disso, reforçou-se a separação entre camadas da aplicação, o que me preparou para expandir o sistema de gestão pet com novas entidades e funcionalidades.
